@@ -17,8 +17,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.Socket;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -26,15 +24,13 @@ import java.util.Map;
  * @author henrik
  */
 public class Sender {
-
-    
-    
-    public static void sendMetric(TaskListener listener, String hostname, Map<String, String> values) {
+        
+    public static void sendMetric(TaskListener listener,String server, String hostname, Map<String, String> values) {
         try {
             String jsonData = convertToJson(hostname,values);
             PrintStream logger = listener.getLogger();
-            logger.println("Zabbix plugin: Sending to server at '"+"192.168.1.10" + "' : " + jsonData);
-            Socket socket = new Socket("192.168.1.10", 10051);
+            logger.println("Zabbix plugin: Sending to server at '"+ server + "' : " + jsonData);
+            Socket socket = new Socket(server, 10051);
             OutputStream os = socket.getOutputStream();
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));           
             writeMessage(os, jsonData.getBytes());
@@ -47,7 +43,7 @@ public class Sender {
             os.close();
             socket.close();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            listener.getLogger().println("Failed to send to zabbix: " +ex);
         }
 
 
@@ -98,9 +94,6 @@ public class Sender {
                     (byte) ((length & 0x0000FF) >> 16),
                     (byte) ((length & 0x000000FF) >> 24),
                     '\0', '\0', '\0', '\0'});
-        System.out.println("Sending: " + data);
         out.write(data);
-    }
-    
-    
+    }        
 }

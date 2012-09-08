@@ -10,7 +10,6 @@
  */
 package org.hudsonci.plugins.zabbix.mbeans;
 
-import java.util.List;
 
 /**
  *
