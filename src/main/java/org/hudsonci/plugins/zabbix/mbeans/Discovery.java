@@ -16,10 +16,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- *
- * @author henrik
- */
 public class Discovery implements DiscoveryMBean {
 
     @Override

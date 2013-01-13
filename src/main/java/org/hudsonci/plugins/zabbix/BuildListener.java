@@ -50,21 +50,17 @@ public class BuildListener extends RunListener<Run> {
         metrics.put(getKey(jobName, "result"), String.valueOf(r.getResult().ordinal));
 
         AbstractTestResultAction<?> tests = r.getAction(AbstractTestResultAction.class);
-
-        int totalTest = 0;
-        int skippedTest = 0;
-        int failedTests = 0;
-        int successTest = 0;
         if (tests != null) {
-            totalTest = tests.getTotalCount();
-            failedTests = tests.getFailCount();
-            skippedTest = tests.getSkipCount();
-            successTest = totalTest - (failedTests + skippedTest);
-        }
-        metrics.put(getKey(jobName, "tests.total"), String.valueOf(totalTest));
-        metrics.put(getKey(jobName, "tests.skip"), String.valueOf(skippedTest));
-        metrics.put(getKey(jobName, "tests.fail"), String.valueOf(failedTests));
-        metrics.put(getKey(jobName, "tests.success"), String.valueOf(successTest));
+            int totalTest = tests.getTotalCount();
+            int failedTests = tests.getFailCount();
+            int skippedTest = tests.getSkipCount();
+            int successTest = totalTest - (failedTests + skippedTest);
+            
+            metrics.put(getKey(jobName, "tests.total"), String.valueOf(totalTest));
+            metrics.put(getKey(jobName, "tests.skip"), String.valueOf(skippedTest));
+            metrics.put(getKey(jobName, "tests.fail"), String.valueOf(failedTests));
+            metrics.put(getKey(jobName, "tests.success"), String.valueOf(successTest));            
+        }        
         metrics.put(getKey(jobName, "timetofix.builds"), getTimeToFixInBuilds(r));
         metrics.put(getKey(jobName, "timetofix.time"), getTimeToFixInMs(r));
         Sender.sendMetric(listener, plugin.getServer(), plugin.getHostname(), metrics);

@@ -6,18 +6,18 @@
     <parent>
         <groupId>org.eclipse.hudson.plugins</groupId>
         <artifactId>hudson-plugin-parent</artifactId>
-        <version>3.0.0-RC2</version>
+        <version>3.0.0</version>
     </parent>
 
     <!-- Identification -->
     <groupId>org.hudsonci.plugins</groupId>
     <artifactId>zabbix-integration</artifactId>
-    <version>0.9-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>hpi</packaging>
 
     <!-- Information -->
     <name>Zabbix Integration Plugin</name>
-    <description>Provides additional JX beans to help easily integrate with Zabbix</description>
+    <description>Provides additional JMX beans and trapper events for Zabbix</description>
     <url>https://github.com/hudson-plugins/zabbix-integration-plugin</url>
     
     <!-- license -->
@@ -54,7 +54,7 @@
         <dependency>
             <groupId>org.eclipse.hudson</groupId>
             <artifactId>hudson-inject</artifactId>
-            <version>3.0.0-RC2</version>
+            <version>3.0.0</version>
         </dependency>
     </dependencies>
 </project>

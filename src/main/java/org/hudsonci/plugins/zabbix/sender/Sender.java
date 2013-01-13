@@ -19,10 +19,6 @@ import java.io.PrintStream;
 import java.net.Socket;
 import java.util.Map;
 
-/**
- *
- * @author henrik
- */
 public class Sender {
         
     public static void sendMetric(TaskListener listener,String server, String hostname, Map<String, String> values) {
